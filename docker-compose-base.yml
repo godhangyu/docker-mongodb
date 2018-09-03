@@ -1,0 +1,13 @@
+
+version: '2.1'
+services:
+  base-mongodb:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+      - IMAGE_ARG_IMAGE_TAG=${IMAGE_ARG_IMAGE_TAG:-3.2.17}
+    environment:
+    - MONGO_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD:-root_pass} # changeme
+    image: ${IMAGE_NAME:-mongo}:${IMAGE_TAG:-3.2.17-CHANGEME}
+    restart: always
