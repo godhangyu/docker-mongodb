@@ -1,7 +1,7 @@
 
 version: '2.1'
 services:
- mongodb:
+  mongodb:
     extends:
       file: docker-compose-base.yml
       service: base-mongodb
@@ -11,20 +11,19 @@ services:
     ports:
     - "${MONGO_27017_PORT:-27017}:27017"
     volumes:
-    - data:/data/db
     - config:/data/configdb
+    - data:/data/db
 
 volumes:
-  data:
-    driver: local
-    driver_opts:
-      type: none
-      device: ${PWD}/data/db
-      o: bind
   config:
     driver: local
     driver_opts:
       type: none
       device: ${PWD}/data/configdb
       o: bind
-
+  data:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PWD}/data/db
+      o: bind
