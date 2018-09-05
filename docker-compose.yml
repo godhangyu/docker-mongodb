@@ -1,0 +1,29 @@
+
+version: '2.1'
+services:
+  image:
+    extends:
+      file: docker-compose-base.yml
+      service: base-mongodb
+    container_name: ${CONTAINER_HOST_NAME:-mongodb}
+    hostname: ${CONTAINER_HOST_NAME:-mongodb}
+    network_mode: bridge
+    ports:
+    - "${MONGO_27017_PORT:-27017}:27017"
+    volumes:
+    - config:/data/configdb
+    - data:/data/db
+
+volumes:
+  config:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PWD}/data/configdb
+      o: bind
+  data:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PWD}/data/db
+      o: bind

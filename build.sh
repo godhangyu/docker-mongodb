@@ -16,7 +16,7 @@ if [ "${TRAVIS_BRANCH}" != "master" ]; then export IMAGE_TAG=${IMAGE_TAG}-SNAPSH
 
 # Build image
 if [[ "$(docker images -q ${IMAGE_PREFIX}/${IMAGE_NAME}:${IMAGE_TAG} 2> /dev/null)" == "" ]]; then
-    docker-compose build mongodb
+    docker-compose build image
 fi
 
 docker-compose push
