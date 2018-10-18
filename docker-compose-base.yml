@@ -10,4 +10,12 @@ services:
     environment:
     - MONGO_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD:-root_pass} # changeme
     image: ${IMAGE_PREFIX:-cirepo/}${IMAGE_NAME:-mongo}:${IMAGE_TAG:-3.2.17}
+    labels:
+      deploy.config.commit: ${LABEL_DEPLOY_CONFIG_COMMIT:-unknown}
+      deploy.config.name: ${LABEL_DEPLOY_CONFIG_NAME:-unknown}
+      deploy.config.ref: ${LABEL_DEPLOY_CONFIG_REF:-unknown}
+      deploy.util.commit: ${LABEL_DEPLOY_UTIL_COMMIT:-unknown}
+      deploy.util.ref: ${LABEL_DEPLOY_UTIL_REF:-unknown}
+      instance.name.short: ${LABEL_INSTANCE_NAME_SHORT:-standalone.mongodb}
+      instance.name: ${LABEL_INSTANCE_NAME:-127.0.0.1/mongodb/standalone}
     restart: always
