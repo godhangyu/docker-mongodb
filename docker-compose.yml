@@ -10,6 +10,7 @@ services:
     network_mode: bridge
     ports:
     - "${MONGO_27017_PORT:-27017}:27017"
+    restart: always
     volumes:
     - config:/data/configdb
     - data:/data/db
