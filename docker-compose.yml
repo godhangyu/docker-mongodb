@@ -6,13 +6,27 @@ services:
       service: base-mongodb
     container_name: ${CONTAINER_HOST_NAME:-standalone.mongodb}
     hostname: ${CONTAINER_HOST_NAME:-standalone.mongodb}
-    network_mode: bridge
+    networks:
+      local-network:
+        ipv4_address: 172.16.238.58
+        #ipv6_address: 2001:3984:3989::58
     ports:
     - "${MONGO_27017_PORT:-27017}:27017"
     restart: always
     volumes:
     - config:/data/configdb
     - data:/data/db
+
+networks:
+  local-network:
+    external: true
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.16.238.0/24
+      #- subnet: 2001:3984:3989::/64
 
 volumes:
   config:
