@@ -6,12 +6,20 @@ services:
       service: base-mongodb
     container_name: ${CONTAINER_HOST_NAME:-standalone.mongodb}
     hostname: ${CONTAINER_HOST_NAME:-standalone.mongodb}
+    labels:
+      deploy.config.commit: ${LABEL_DEPLOY_CONFIG_COMMIT:-unknown}
+      deploy.config.name: ${LABEL_DEPLOY_CONFIG_NAME:-unknown}
+      deploy.config.ref: ${LABEL_DEPLOY_CONFIG_REF:-unknown}
+      deploy.util.commit: ${LABEL_DEPLOY_UTIL_COMMIT:-unknown}
+      deploy.util.ref: ${LABEL_DEPLOY_UTIL_REF:-unknown}
+      instance.name.short: ${LABEL_INSTANCE_NAME_SHORT:-standalone.mongodb}
+      instance.name: ${LABEL_INSTANCE_NAME:-127.0.0.1/mongodb/standalone}
     networks:
       local-network:
-        ipv4_address: 172.16.238.58
-        #ipv6_address: 2001:3984:3989::58
+        ipv4_address: ${IPV4_ADDRESS:-172.16.238.58}
+        #ipv6_address: ${IPV6_ADDRESS:-2001:3984:3989::58}
     ports:
-    - "${MONGO_27017_PORT:-27017}:27017"
+    - "${EXTERNAL_MONGO_27017_PORT:-27017}:27017"
     restart: always
     volumes:
     - config:/data/configdb
